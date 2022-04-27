@@ -43,7 +43,7 @@ public class DoctorController {
 
 		List<Doctor> list = service.findAllDoctor();
 		if (list == null) {
-			throw new ResourceNotfoundException("Resource not availabe in DB");
+			throw new ResourceNotfoundException("Resource not availabe in DATABASE");
 		}
 		return new ResponseEntity<List<Doctor>>(list, HttpStatus.OK);
 	}
