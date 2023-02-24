@@ -1,7 +1,8 @@
 spring:
   datasource:
-    url: jdbc:oracle:thin:@host.docker.internal:1521:orcl11
+    #url: jdbc:oracle:thin:@host.docker.internal:1521:orcl11
     #url: jdbc:oracle:thin:@mysql-docker:1521:orcl11
+    url: jdbc:oracle:thin:@localhost:1521:orcl11
     password: pinku
     username: system
     driver-class-name: "oracle.jdbc.OracleDriver"
@@ -15,8 +16,8 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
-  security:
-    user:
-      name: user
-      password: user1
+ # security:
+  #  user:
+   #   name: user
+    #  password: user1
  
