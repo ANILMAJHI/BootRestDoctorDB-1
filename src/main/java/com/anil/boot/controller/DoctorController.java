@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.anil.boot.exception.DoctorException;
@@ -27,14 +27,12 @@ public class DoctorController {
 	DoctoryService service;
 
 	@GetMapping("/test")
-	public String testMessage()
-	{
+	public String testMessage() {
 		return "testing message...:";
 	}
-	
-	
+
 	@PostMapping("/savedoctor")
-	//@PutMapping("/savedoctor")
+	// @PutMapping("/savedoctor")
 	public ResponseEntity<Doctor> saveDoctor(@RequestBody Doctor doctor) {
 
 		return new ResponseEntity<Doctor>(service.saveDoctor(doctor), HttpStatus.OK);
@@ -48,7 +46,7 @@ public class DoctorController {
 			throw new ResourceNotfoundException("Resource not availabe in DATABASE");
 		}
 		return new ResponseEntity<>(list, HttpStatus.OK);
-		//return new ResponseEntity<List<Doctor>>(list, HttpStatus.OK);
+		// return new ResponseEntity<List<Doctor>>(list, HttpStatus.OK);
 	}
 
 	@GetMapping("/docId/{id}")
@@ -63,7 +61,7 @@ public class DoctorController {
 		 * " doctor is not available in DB,Please check in other doctorID ...")
 		 * .getMessage(), HttpStatus.NOT_FOUND);
 		 */
-		throw new ResourceNotfoundException(id+":Resource not availabe in DB");
+		throw new ResourceNotfoundException(id + ":Resource not availabe in DB");
 
 		// return new ResponseEntity<Doctor>(service.saveDoctor(doctor), HttpStatus.OK);
 	}
@@ -96,5 +94,22 @@ public class DoctorController {
 		// return new ResponseEntity<Doctor>(service.saveDoctor(doctor), HttpStatus.OK);
 	}
 
-	// return new ResponseEntity<Doctor>(service.saveDoctor(doctor), HttpStatus.OK);
+	
+	/*
+	 * for testing in postman this is url below
+	 * 
+	 * http://localhost:8080/api/findPagination?page=0&size=2
+	 * 
+	 */
+	//@GetMapping("/findPagination/{page}/{size}")
+	@GetMapping("/findPagination")
+	public ResponseEntity<List<Doctor>> getAllDoctorsWithPagination(@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "3") int size) {
+		List<Doctor> doctors = service.findDeptWithPagination(page, size);
+		return new ResponseEntity<>(doctors, HttpStatus.OK);
+		
+		
+
+	}
+
 }

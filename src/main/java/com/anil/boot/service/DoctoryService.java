@@ -3,6 +3,9 @@ package com.anil.boot.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -15,14 +18,14 @@ public class DoctoryService {
 	@Autowired
 	DoctorRepository doctorRepository;
 
-	List<Doctor> listDoctor; //= doctorRepository.findAll();
+	List<Doctor> listDoctor; // = doctorRepository.findAll();
 
 	public Doctor saveDoctor(Doctor doctor) {
 		return doctorRepository.save(doctor);
 	}
 
 	public List<Doctor> findAllDoctor() {
-		List<Doctor> listDoctor=doctorRepository.findAll();
+		List<Doctor> listDoctor = doctorRepository.findAll();
 
 		return (List<Doctor>) listDoctor;
 	}
@@ -33,7 +36,7 @@ public class DoctoryService {
 		/*
 		 * if (!user.isEmpty()) { return (Doctor) user; }
 		 */
-		listDoctor=doctorRepository.findAll();
+		listDoctor = doctorRepository.findAll();
 		for (Doctor doc : listDoctor) {
 			Long userId = doc.getId();
 			if (userId == id) {
@@ -44,11 +47,11 @@ public class DoctoryService {
 		return null;
 	}
 
-	public Doctor findByName(String name){
+	public Doctor findByName(String name) {
 		// List<Doctor> doc = c.findAll();
-		//Doctor doctor = new Doctor();
-		listDoctor=doctorRepository.findAll();
-		
+		// Doctor doctor = new Doctor();
+		listDoctor = doctorRepository.findAll();
+
 		for (Doctor doctor1 : listDoctor) {
 			/*
 			 * String doctorName = doctor1.getName(); long doctorId = doctor1.getId();
@@ -57,8 +60,8 @@ public class DoctoryService {
 			 * doctor.setName(doctorName); doctor.setId(doctorId);
 			 * doctor.setSpecialize(doctorSpe); doctor.setSalary(doctorSalary);
 			 */
-			String docName=doctor1.getName();
-			if(!StringUtils.isEmpty(docName) && docName.equalsIgnoreCase(name)) {
+			String docName = doctor1.getName();
+			if (!StringUtils.isEmpty(docName) && docName.equalsIgnoreCase(name)) {
 				return doctor1;
 			}
 
@@ -69,12 +72,19 @@ public class DoctoryService {
 
 	public Doctor deleteByDocId(Long id) {
 		doctorRepository.findAll();
-		for(Doctor doc: listDoctor)
-		{
-			if(doc.getId()==id);
+		for (Doctor doc : listDoctor) {
+			if (doc.getId() == id)
+				;
 			doctorRepository.deleteById(id);
 		}
 		return null;
+	}
+
+	public List<Doctor> findDeptWithPagination(int page, int size) {
+
+	        int start = page * size;
+	        int end = start + size;
+	        return doctorRepository.findAllDoctorsWithPagination(end, start);
 	}
 
 }

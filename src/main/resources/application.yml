@@ -6,8 +6,8 @@ spring:
     password: pinku
     username: system
     driver-class-name: "oracle.jdbc.OracleDriver"
-  jpa:
     
+  jpa:
     database: ORACLE
     default_schema: Anil
     #spring.jpa.hibernate.generate_ddl: true
