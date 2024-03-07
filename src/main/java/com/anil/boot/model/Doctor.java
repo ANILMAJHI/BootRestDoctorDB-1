@@ -38,8 +38,9 @@ public class Doctor implements Serializable {
 	@Column
 	@NotBlank(message = "Specialize Cannot be Blank")
 	private String specialize;
+	
 	@Column
-	@Pattern(regexp = "\\d+", message = "Salary should be an integer")	
+	/* @Pattern(regexp = "\\d+", message = "Salary should be an integer") */
 	private int salary;
 
 	public long getId() {
