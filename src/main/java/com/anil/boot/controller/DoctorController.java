@@ -105,7 +105,7 @@ public class DoctorController {
 
 	@DeleteMapping("/deldoc/{id}")
 	public ResponseEntity<Doctor> deleteByDocId(@PathVariable("id") long id) throws Exception {
-	
+
 		Doctor doctor = service.deleteByDocId(id);
 
 		if (doctor != null) {
