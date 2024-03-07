@@ -1,0 +1,5 @@
+swagger url:-
+http://localhost:9022/swagger-ui/index.html#/doctor-controller
+
+Here used exception handling
+Here Used Testing using Mockito

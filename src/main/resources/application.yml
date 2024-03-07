@@ -1,3 +1,7 @@
+server:
+  port: 9022
+  
+
 spring:
   datasource:
     #url: jdbc:oracle:thin:@host.docker.internal:1521:orcl11
@@ -20,4 +24,12 @@ spring:
   #  user:
    #   name: user
     #  password: user1
- 
+
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
+      
+  cloud:
+    config:
+      enabled: false

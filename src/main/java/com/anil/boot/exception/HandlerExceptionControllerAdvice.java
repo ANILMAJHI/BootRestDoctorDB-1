@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
@@ -22,6 +21,7 @@ public class HandlerExceptionControllerAdvice {
 
 		List<String> list=new ArrayList<>();
 		list.add(exception.getLocalizedMessage());
+		//list.add(exception.getCause().getMessage());
 		
 		ExceptionResponse errorResponse = new ExceptionResponse("Record Not Found",list);
 		//errorResponse.setMessageError(exception.getMessage());

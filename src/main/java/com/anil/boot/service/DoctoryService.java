@@ -1,11 +1,10 @@
 package com.anil.boot.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -30,6 +29,7 @@ public class DoctoryService {
 		return (List<Doctor>) listDoctor;
 	}
 
+	@Cacheable(cacheNames = "doctorCache", key = "id")
 	public Doctor findById(long id) {
 		// List<Doctor> user = doctorRepository.findAll();
 
@@ -45,6 +45,11 @@ public class DoctoryService {
 
 		}
 		return null;
+	}
+
+	public Optional<Doctor> findDocID(long id) {
+		listDoctor = doctorRepository.findAll();
+		return listDoctor.stream().filter(s -> s.getId() == id).findFirst();
 	}
 
 	public Doctor findByName(String name) {
@@ -71,20 +76,20 @@ public class DoctoryService {
 	}
 
 	public Doctor deleteByDocId(Long id) {
-		doctorRepository.findAll();
+		List<Doctor> listDoctor=doctorRepository.findAll();
 		for (Doctor doc : listDoctor) {
-			if (doc.getId() == id)
-				;
-			doctorRepository.deleteById(id);
+			if (doc.getId() == id) {
+				doctorRepository.deleteById(id);
+			}
 		}
 		return null;
 	}
 
 	public List<Doctor> findDeptWithPagination(int page, int size) {
 
-	        int start = page * size;
-	        int end = start + size;
-	        return doctorRepository.findAllDoctorsWithPagination(end, start);
+		int start = page * size;
+		int end = start + size;
+		return doctorRepository.findAllDoctorsWithPagination(end, start);
 	}
 
 }

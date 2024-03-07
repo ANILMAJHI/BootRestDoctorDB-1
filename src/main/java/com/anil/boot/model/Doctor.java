@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -19,20 +20,22 @@ import lombok.Setter;
 @DynamicUpdate
 @Setter
 @Getter
-public class Doctor implements Serializable{
+public class Doctor implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@Column
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	@Column
+	@NotBlank(message = "Name Cannot be Blank")
 	private String name;
 	@Column
+	@NotBlank(message = "Specialize Cannot be Blank")
 	private String specialize;
 	@Column
 	private int salary;
