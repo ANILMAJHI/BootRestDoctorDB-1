@@ -3,6 +3,8 @@ package com.anil.boot.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +44,7 @@ public class DoctorController {
 
 	@PostMapping("/savedoctor")
 	// @PutMapping("/savedoctor")
-	public ResponseEntity<Doctor> saveDoctor(@RequestBody Doctor doctor) {
+	public ResponseEntity<Doctor> saveDoctor(@Valid @RequestBody Doctor doctor) {
 
 		logger.debug("save doctor details in DB....");
 		return new ResponseEntity<Doctor>(service.saveDoctor(doctor), HttpStatus.OK);

@@ -2,4 +2,6 @@ swagger url:-
 http://localhost:9022/swagger-ui/index.html#/doctor-controller
 
 Here used exception handling
+Field validation using @valid annotation
+Using cache Implementation
 Here Used Testing using Mockito
