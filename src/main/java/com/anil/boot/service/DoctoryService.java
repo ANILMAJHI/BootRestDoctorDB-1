@@ -29,6 +29,7 @@ public class DoctoryService {
 		return (List<Doctor>) listDoctor;
 	}
 
+	//when you hit 1st time, its got to db after that its not go to db.
 	@Cacheable(cacheNames = "doctorCache", key = "id")
 	public Doctor findById(long id) {
 		// List<Doctor> user = doctorRepository.findAll();
