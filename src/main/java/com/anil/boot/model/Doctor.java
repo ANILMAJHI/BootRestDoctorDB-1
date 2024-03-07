@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -39,6 +39,7 @@ public class Doctor implements Serializable {
 	@NotBlank(message = "Specialize Cannot be Blank")
 	private String specialize;
 	@Column
+	@Pattern(regexp = "\\d+", message = "Salary should be an integer")	
 	private int salary;
 
 	public long getId() {
